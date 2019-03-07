@@ -1,0 +1,8 @@
+*.meta
+*.cache
+*.bakert
+*.nupkg
+*.nupkg
+*.p7s
+HoloSkyView/Assets/HoloToolkit
+

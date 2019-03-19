@@ -36,7 +36,7 @@ public class GSTimeConverter
     }
     //https://aa.usno.navy.mil/faq/docs/GAST.php
     //Calculates GSMT
-    private double GreenwichStandardTime()
+    private void GreenwichStandardTime()
     {
         JulianDate();
 
@@ -44,7 +44,7 @@ public class GSTimeConverter
 
         double GMST = 6.697374558 + 0.06570982441908 * d;
         //Currently not useable
-        return GMST;
+        
 
 
 
@@ -52,8 +52,9 @@ public class GSTimeConverter
 
     public double LocalSidrealTime()
     {
+        GreenwichStandardTime();
 
-        double LST = GreenwichStandardTime() + (longitude / 15);
+        double LST = GMST + (longitude / 15);
 
         return LST;
 

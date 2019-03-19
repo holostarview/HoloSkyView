@@ -1,11 +1,15 @@
-﻿public interface ISkyProjection
+﻿//probably not needed
+/*
+public interface ISkyProjection
 {
     string CelestialName();
     double ConvertAzimuth();
     double ConvertAngle();
-    double ConvertMagnitude();
+    double Magnitude();
 
 
 
 
 }
+
+*/

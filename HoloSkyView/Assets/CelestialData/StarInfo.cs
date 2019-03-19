@@ -2,12 +2,11 @@
 using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-
 using System.IO;
 
 
 
-public class StarInfo : GSTimeConverter, ISkyProjection
+public class StarInfo : GSTimeConverter
 {
    //Will jsut be callable no stardata in this class?
   
@@ -15,10 +14,13 @@ public class StarInfo : GSTimeConverter, ISkyProjection
     
     private double rightAscension;
     private double declination;
-    private double angle = 0;
+    private double altitude = 0;
     private double azimuth = 0;
     private List<object[]> starList;
     private static DateTime currentDate = DateTime.Now;
+    private double latitude = 51.749; //Currently lat for london. Get from paired app once availiable
+    double h;
+    double mag;
 
 
     StarInfo()
@@ -43,6 +45,7 @@ public class StarInfo : GSTimeConverter, ISkyProjection
     {
         string starName = starArray[0].ToString();
 
+        return starName;
 
 
     }
@@ -50,14 +53,25 @@ public class StarInfo : GSTimeConverter, ISkyProjection
     public double ConvertAngle(object[] starArray)
     {
         //get the current RA and dec from array
-        //The math here
-        double H =  (LocalSidrealTime() - rightAscension) * 15;
+        rightAscension = Convert.ToDouble(starArray[2]);
+        declination = Convert.ToDouble(starArray[3]);
+
+        h =  (LocalSidrealTime() - rightAscension) * 15;
+
+       altitude = Math.Sin(Math.Sin(declination) * Math.Sin(latitude) + Math.Cos(latitude * Math.Cos(h)));
+
+       
+
+        return altitude;
         
 
     }
 
     public double ConvertAzimuth(object[] starArray)
     {
+        azimuth = Math.Sin(Math.Sin(h) * Math.Cos(declination) / Math.Cos(azimuth));
+
+        return azimuth;
 
         //get the current RA and dec from array
         //The math here
@@ -66,10 +80,14 @@ public class StarInfo : GSTimeConverter, ISkyProjection
 
     }
 
+    public double Magntitude(object[] starArray)
+    {
+        mag = Convert.ToDouble(starArray[1]);
+
+        return mag;
+
+
+    }
+
     
-
-
-
-
-
 }

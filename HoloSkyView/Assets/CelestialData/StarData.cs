@@ -4,12 +4,12 @@ using System.IO;
 using System.Data.SQLite;
 using System;
 
-public abstract class StarData {
-    private const string ConnectionString = "Data Source=Assets/starData/starData.sqlite;Version=3;";
+public class StarData {
+    private const string ConnectionString = "Data Source=Assets/starData/starDB.sqlite;Version=3;";
 
     private List<object[]> starList = new List<object[]>();
 
-    private object[] starArray = new object[3];
+    private object[] starArray = new object[4];
 
     void starInfo () {
 
@@ -28,9 +28,10 @@ public abstract class StarData {
 
         SQLiteCommand loadVisible = new SQLiteCommand(visibleSQL, starDatabase);
 
-        SQLiteDataReader reader = loadVisible.ExecuteReader();
+        SQLiteDataReader reader = loadVisible.ExecuteReader(0);
 
         while (reader.Read())
+        {
             starArray[0] = reader["ProperName"];
             starArray[1] = reader["Mag"];
             starArray[2] = reader["RA"];
@@ -39,7 +40,7 @@ public abstract class StarData {
             starList.Add(starArray);
 
 
-        
+        }
 
 
 
@@ -53,7 +54,7 @@ public abstract class StarData {
         //Insert planet database here if also using sqlite db
 
     }
-    protected List<object[]> getStarList()
+    public List<object[]> getStarList()
     {
         starInfo();
         return starList;

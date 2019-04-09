@@ -20,15 +20,18 @@ public class StarInfo : GSTimeConverter
     private static DateTime currentDate = DateTime.Now;
     private double latitude = 51.749; //Currently lat for london. Get from paired app once availiable
     double h;
-    double mag;
+ 
+    double magnitude;
 
 
-    StarInfo()
+    public StarInfo()
      {
 
-        //starList = getStarList();
+        StarData s = new StarData();
 
-     }
+        starList = s.getStarList();
+
+    }
 
     /*
         public StarInfo(int starId, string properName, double distance, double rightAscension, double declination) {
@@ -50,15 +53,12 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double ConvertAngle(object[] starArray)
+    public double ConvertAngle(object ra, object dec)
     {
-        //get the current RA and dec from array
-        rightAscension = Convert.ToDouble(starArray[2]);
-        declination = Convert.ToDouble(starArray[3]);
+      
+        h =  (LocalSidrealTime() - Convert.ToDouble(ra)) * 15;
 
-        h =  (LocalSidrealTime() - rightAscension) * 15;
-
-       altitude = Math.Sin(Math.Sin(declination) * Math.Sin(latitude) + Math.Cos(latitude * Math.Cos(h)));
+       altitude = Math.Sin(Math.Sin(Convert.ToDouble(dec)) * Math.Sin(latitude) + Math.Cos(latitude * Math.Cos(h)));
 
        
 
@@ -67,9 +67,10 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double ConvertAzimuth(object[] starArray)
+    public double ConvertAzimuth(object ra, object dec)
     {
-        azimuth = Math.Sin(Math.Sin(h) * Math.Cos(declination) / Math.Cos(azimuth));
+        //TODO Fix this formula
+        azimuth = Math.Sin(Math.Sin(h) * Math.Cos(Convert.ToDouble(dec)) / Math.Cos(azimuth));
 
         return azimuth;
 
@@ -80,11 +81,12 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double Magntitude(object[] starArray)
+    public double Magntitude(object mag )
     {
-        mag = Convert.ToDouble(starArray[1]);
+        // convert to double as 'mag' is an object type (Fix this)
+        magnitude = Convert.ToDouble(mag);
 
-        return mag;
+        return magnitude;
 
 
     }

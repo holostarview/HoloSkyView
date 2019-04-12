@@ -8,8 +8,9 @@ Uses Unity 2017.4.25f1
 Uses HoloTooklkit (AKA Mixed reality toolkit) HoloToolkit 2017.4.3.0
 
 Basic settings: 
-Scipting Backed: IL2CPP (No reason .NET would not work if needed) 
-Api Comp./Scripting Runtime version: .Net 4.6
+Scipting Backed: ~~IL2CPP (No reason .NET would not work if needed) 
+Api Comp./Scripting Runtime version: .Net 4.6~~ Currently the project  does not build.
+Strong possibility this is due to Mono.Slite. (Same problem as with previous library need to find plugins that are compatible with UWP/HoloLens).
 
 
 Uses the Mono.Data.SqLite for DB access 

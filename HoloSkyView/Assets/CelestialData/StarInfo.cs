@@ -16,8 +16,7 @@ public class StarInfo : GSTimeConverter
     private double declination;
     private double altitude = 0;
     private double azimuth = 0;
-    private List<object[]> starList;
-    private static DateTime currentDate = DateTime.Now;
+    //private static DateTime currentDate = DateTime.Now;
     private double latitude = 51.749; //Currently lat for london. Get from paired app once availiable
     double h;
  
@@ -27,9 +26,7 @@ public class StarInfo : GSTimeConverter
     public StarInfo()
      {
 
-        StarData s = new StarData();
-
-        starList = s.getStarList();
+      
 
     }
 
@@ -43,8 +40,13 @@ public class StarInfo : GSTimeConverter
         }
 
         */
+    private double RadianToDegree(double angle)
+    {
+        return angle * (180.0 / Math.PI);
+    }
 
-    public string CelestialName(object[] starArray)
+
+    public string CelestialName(string[] starArray)
     {
         string starName = starArray[0].ToString();
 
@@ -53,12 +55,12 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double ConvertAngle(object ra, object dec)
+    public double ConvertAngle(string ra, string dec)
     {
       
         h =  (LocalSidrealTime() - Convert.ToDouble(ra)) * 15;
 
-       altitude = Math.Sin(Math.Sin(Convert.ToDouble(dec)) * Math.Sin(latitude) + Math.Cos(latitude * Math.Cos(h)));
+       altitude =  RadianToDegree(Math.Sin(Math.Sin(Convert.ToDouble(dec)) * Math.Sin(latitude) + Math.Cos(latitude *Math.Cos(Convert.ToDouble(dec)) * Math.Cos(h))));
 
        
 
@@ -67,10 +69,10 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double ConvertAzimuth(object ra, object dec)
+    public double ConvertAzimuth(string ra, string dec)
     {
         //TODO Fix this formula
-        azimuth = Math.Sin(Math.Sin(h) * Math.Cos(Convert.ToDouble(dec)) / Math.Cos(azimuth));
+        azimuth = RadianToDegree(Math.Sin(Math.Sin(h) * Math.Cos(Convert.ToDouble(dec)) / Math.Cos(altitude)));
 
         return azimuth;
 
@@ -81,7 +83,7 @@ public class StarInfo : GSTimeConverter
 
     }
 
-    public double Magntitude(object mag )
+    public double Magntitude(string mag )
     {
         // convert to double as 'mag' is an object type (Fix this)
         magnitude = Convert.ToDouble(mag);
@@ -90,6 +92,8 @@ public class StarInfo : GSTimeConverter
 
 
     }
+
+
 
     
 }

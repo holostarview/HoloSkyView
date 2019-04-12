@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloSkyView", "HoloSkyView.csproj", "{DDF3EF92-428A-7D1C-EF9E-28C2395F6640}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoloSkyView.Editor", "HoloSkyView.Editor.csproj", "{6DCDDE18-42A9-8995-93E7-B3F8CCDB5AF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF3EF92-428A-7D1C-EF9E-28C2395F6640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF3EF92-428A-7D1C-EF9E-28C2395F6640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF3EF92-428A-7D1C-EF9E-28C2395F6640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF3EF92-428A-7D1C-EF9E-28C2395F6640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DCDDE18-42A9-8995-93E7-B3F8CCDB5AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DCDDE18-42A9-8995-93E7-B3F8CCDB5AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DCDDE18-42A9-8995-93E7-B3F8CCDB5AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DCDDE18-42A9-8995-93E7-B3F8CCDB5AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

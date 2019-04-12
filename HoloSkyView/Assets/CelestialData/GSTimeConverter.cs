@@ -42,7 +42,7 @@ public class GSTimeConverter
 
         double d = julianDate - 2451545;
 
-        double GMST = 6.697374558 + 0.06570982441908 * d;
+        GMST = 6.697374558 + 0.06570982441908 * d;
         //Currently not useable
         
 

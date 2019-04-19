@@ -1,0 +1,1 @@
+Add references to 2015 c++runtime for uwp and SQLite for uwp

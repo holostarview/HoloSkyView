@@ -13,13 +13,18 @@ public class GSTimeConverter
     private double minutes = 0;
     private double seconds = 0;
     //Don't leave the -3 error somewhere in juliandate formula
-    private double day = currentDate.Day - 3;
+    private double day = currentDate.Day - 3; 
     private double julianDay;
     private double julianDate;
     private double GMST;
 
     //Get it from phone app
-    private double longitude = 0.1;
+    private double longitude = 0.1; // Needs local longitude 
+
+    /* 
+     * This class calculates everything nessasary to obtain the 
+     * local sidreal time in order to  calculate horizontal coordinates.
+     */ 
 
     private void JulianDate()
     {
@@ -43,7 +48,6 @@ public class GSTimeConverter
         double d = julianDate - 2451545;
 
         GMST = 6.697374558 + 0.06570982441908 * d;
-        //Currently not useable
         
 
 

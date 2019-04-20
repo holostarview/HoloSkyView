@@ -25,14 +25,13 @@ public class StarInfo : GSTimeConverter
     public StarInfo(){
     }
 
-    /*
-     This class is used to convert the static equatorial coordinates to 
-     horzontal coordinates which the app us to display planets as seen by the 
-     user in their current location.
-     Results are in degrees.
-
-        Reference for the math used: http://star-www.st-and.ac.uk/~fv/webnotes/chapter7.htm
-         */
+    
+    /* This class is used to convert the static equatorial coordinates to 
+     * horzontal coordinates which the app us to display planets as seen by the 
+     * user in their current location.
+     * Results are in degrees.
+     * Reference for the math used: http://star-www.st-and.ac.uk/~fv/webnotes/chapter7.htm
+     */
     private double RadianToDegree(double angle)
     {
         return angle * (180.0 / Math.PI);

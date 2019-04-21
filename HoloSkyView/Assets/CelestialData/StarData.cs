@@ -36,14 +36,25 @@ public class StarData
                     var line = reader.ReadLine();
                     var values = line.Split(',');
 
-                    starArray[0] = "lul";
-                    if (values[10].ToString() != "pmra")
+                    if (values[6] == "")
                     {
-                        starArray[1] = values[10].ToString();
+                        starArray[0] = "NameTest";
+
+                    }
+
+                    else
+                    {
+                        starArray[0] = values[6];
+                    }
+
+
+                    if (values[13].ToString() != "mag")
+                    {
+                        starArray[1] = values[13].ToString();
                     }
                     else
                     {
-                        starArray[1] =180.ToString();
+                        starArray[1] =0.ToString();
                     }
                     if (values[7].ToString() != "ra")
                     {
@@ -61,8 +72,11 @@ public class StarData
                     {
                         starArray[2] = 0.ToString();
                     }
-
-                    starList.Add(starArray);
+                    Debug.Log(values[13]);
+                    if (values[13] != "mag" && Convert.ToDouble(values[13]) < 3)
+                    {
+                        starList.Add(starArray);
+                    }
                 }
 
                 i++;

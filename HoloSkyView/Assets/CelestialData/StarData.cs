@@ -72,10 +72,11 @@ public class StarData
                     {
                         starArray[2] = 0.ToString();
                     }
-                    Debug.Log(values[13]);
                     if (values[13] != "mag" && Convert.ToDouble(values[13]) < 3)
                     {
                         starList.Add(starArray);
+
+
                     }
                 }
 

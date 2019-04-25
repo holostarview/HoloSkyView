@@ -13,14 +13,15 @@ public class StarInfo : GSTimeConverter
 
     private double rightAscension; //Right Ascension in equatorial coordinate system
     private double declination; //declination in equatorial coordinate system
-    private double altitude = 0; // vertical position
-    private double azimuth = 0; //horizontal position
+    private double altitude; // vertical position
+    private double azimuth; //horizontal position
+    private double finalAzimuth;
                                 //private static DateTime currentDate = DateTime.Now;
-    private double latitude = 51.749; //Currently lat for london. TODO: Get from paired app once availiable
+    private double latitude = 48.4316; //Currently lat for london. TODO: Get from paired app once availiable
 
     double h; // Local hour angle in degrees
     double magnitude; // Magnitude of the star
-
+    double raditude;
 
     public StarInfo(){
     }
@@ -36,6 +37,14 @@ public class StarInfo : GSTimeConverter
     {
         return angle * (180.0 / Math.PI);
     }
+    private double DegreeToRadian(double angle)
+    {
+        return angle * (Math.PI / 180.0);
+    }
+
+  
+
+
 
 
     public string CelestialName(string[] starArray) //Unused to be removed once confirmed useless
@@ -49,12 +58,14 @@ public class StarInfo : GSTimeConverter
 
     public double ConvertAngle(string ra, string dec) // Get star angle (altitude) in degrees (vertical position)
     {
-      
-        h =  (LocalSidrealTime() - Convert.ToDouble(ra)) * 15;
+          h = (LocalSidrealTime() - Convert.ToDouble(ra)) * 15;
+          // h = 7.31 * 15;
 
-       altitude =  RadianToDegree(Math.Sin(Convert.ToDouble(dec)) * Math.Sin(latitude) + Math.Cos(latitude *Math.Cos(Convert.ToDouble(dec)) * Math.Cos(h)));
 
-  
+        altitude = Math.Sin(Convert.ToDouble(dec)) * Math.Sin(latitude) + Math.Cos(Convert.ToDouble(dec)) *Math.Cos(latitude) * Math.Cos(h);
+
+        raditude = altitude;
+        altitude = RadianToDegree(Math.Asin(altitude));
         return altitude;
         
 
@@ -62,9 +73,19 @@ public class StarInfo : GSTimeConverter
 
     public double ConvertAzimuth(string ra, string dec) // Get star azimuth in degrees (horizontal position)
     {
-        azimuth = RadianToDegree(Math.Sin(h) * Math.Cos(Convert.ToDouble(dec)) / Math.Cos(altitude));
+        //azimuth = Math.Sin(h) * Math.Cos(Convert.ToDouble(dec)) / Math.Cos(raditude);
+        double azimuth = (Math.Sin(Convert.ToDouble(dec)) - raditude * Math.Sin(latitude)) / (Math.Cos(raditude) * Math.Cos(latitude));
 
-        return azimuth;
+        if (Math.Sin(h) > 0)
+        {
+            finalAzimuth = 360 - RadianToDegree(Math.Acos(azimuth));
+        }
+        else
+        {
+            finalAzimuth = RadianToDegree(Math.Acos(azimuth));
+
+        }
+        return finalAzimuth;
 
        
 

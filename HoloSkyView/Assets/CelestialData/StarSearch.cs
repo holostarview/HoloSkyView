@@ -29,7 +29,7 @@ public class StarSearch : MonoBehaviour
             if (!TouchScreenKeyboard.visible)
             {
                 // Sets the starList to the one obtained from reading the database
-                findMe = GameObject.FindGameObjectsWithTag("Polaris");
+                findMe = GameObject.FindGameObjectsWithTag(keyboardText);
                
             }
         }
@@ -72,16 +72,14 @@ public class StarSearch : MonoBehaviour
 
             keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false);
             Starsearch();
-            foreach (GameObject star in findMe)
-            {
+            GameObject star = findMe[0];
+            target = star.transform;
+            pointingarrow.transform.position = pointingarrow.transform.forward;
 
-                target = star.transform;
-                pointingarrow.transform.position = pointingarrow.transform.forward;
+            pointingarrow.transform.LookAt(star.transform);
 
-                pointingarrow.transform.LookAt(target);
-
-
-            }
+            //pointingarrow.transform.LookAt(target);
+         
 
         }
 

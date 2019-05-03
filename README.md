@@ -4,9 +4,7 @@ Hololens Stargazing app
 
 ## Requirements
 Unity 2018.3 (Will be LTS version) with IL2CPP build tools
-Mixed Reality toolkit (AKA HoloToolkit) HoloToolkit v.2.0 (Already installed)
-Windows SDK 18362 (Requirment of Mixed Reality Toolkit) This requires you to run the current windows insider build as of April 2019. 
-
+Holotoolkit HoloToolkit 2017.4.3.0 (Already isntalled)
 ## Build settings: 
 Target platform: Universal Windows Platform and target device HoloLens/x86
 Scipting Backed: IL2CPP (.Net will not build)

@@ -19,14 +19,14 @@ public class GSTimeConverter
     private double GMST;
 
     //Get it from phone app
-    private double longitude = 0.1; // Needs local longitude 
+    private double longitude = 2.7; // Needs local longitude 
 
     /* 
      * This class calculates everything nessasary to obtain the 
      * local sidreal time in order to  calculate horizontal coordinates.
      */ 
 
-    private void JulianDate()
+    private double JulianDate()
     {
         //JDN = (1461 × (Y + 4800 + (M − 14)/12))/4 +(367 × (M − 2 − 12 × ((M − 14)/12)))/12 − (3 × ((Y + 4900 + (M - 14)/12)/100))/4 + D − 32075
 
@@ -36,29 +36,24 @@ public class GSTimeConverter
         //Calculates Date at 00:00 of the day
         julianDate = julianDay + ((hours - 12) / 24) + (minutes / 1440) + (seconds / 86400);
 
-       
+        return julianDay;
 
     }
     //https://aa.usno.navy.mil/faq/docs/GAST.php
     //Calculates GSMT
-    private void GreenwichStandardTime()
+    private double DecimalUniversalTime()
     {
-        JulianDate();
+        var stringUTC = DateTime.UtcNow.TimeOfDay.ToString();
+        var decimalUTC = Convert.ToDouble(Convert.ToDecimal(TimeSpan.Parse(stringUTC).TotalHours));
 
-        double d = julianDate - 2451545;
-
-        GMST = 6.697374558 + 0.06570982441908 * d;
-        
-
-
+        return decimalUTC;
 
     }
 
     public double LocalSidrealTime()
     {
-        GreenwichStandardTime();
 
-        double LST = GMST + (longitude / 15);
+        double LST = 100.46 + 0.985647 * JulianDate() + longitude + 15* DecimalUniversalTime();
 
         return LST;
 

@@ -6,9 +6,7 @@ using UnityEngine.XR.WSA.Input;
 public class StarSearch : MonoBehaviour
 {
     public TouchScreenKeyboard keyboard;
-    string keyboardText;
-    public Transform target;
-    public GameObject[] findMe;
+    private string keyboardText;
     public GameObject pointingarrow;
 
     private RaycastHit hitInfo;
@@ -20,26 +18,14 @@ public class StarSearch : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Starsearch()
-    {
-        if (keyboard != null)
-        {
-            keyboardText = keyboard.text;
-            // Do stuff with keyboardText
-            if (!TouchScreenKeyboard.visible)
-            {
-                // Sets the starList to the one obtained from reading the database
-                findMe = GameObject.FindGameObjectsWithTag(keyboardText);
-               
-            }
-        }
-    }
+
 
     void Start()
     {
         recogniser = new GestureRecognizer();
         recogniser.SetRecognizableGestures(GestureSettings.Tap | GestureSettings.DoubleTap);
         // Double-tap settings can be found in InputManager / EventSystem
+        //TODO: Change the below
         recogniser.TappedEvent += ActOnTaps;
         recogniser.StartCapturingGestures();
 
@@ -52,12 +38,45 @@ public class StarSearch : MonoBehaviour
 
     }
 
-    
+    private void Recogniser_Tapped(TappedEventArgs obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
     // Update is called once per frame
+    int i=0;
     void Update()
     {
+        //Temporary before implementing reset button
+        if (i ==0) {
+            keyboardText = "Polaris";
+
+            ShowTheStar();
+            i++;
+        }
         
         
+
+
+
+
+
+
+
+
+    }
+
+    private void ShowTheStar()
+    {
+        Debug.Log("Shown");
+        GameObject pointTarget = GameObject.Find(keyboardText);
+
+        
+
+        GameObject userPosition = GameObject.Find("MixedRealityCameraParent");
+        lineRenderer.SetPosition(0, userPosition.transform.position);
+        lineRenderer.SetPosition(1, pointTarget.transform.position);
 
 
 
@@ -67,22 +86,15 @@ public class StarSearch : MonoBehaviour
         if (tapCount == 1) // originally 2 but 1 for testing purposes
         {
             Debug.Log("Started");
-            Instantiate(pointingarrow);
 
 
-            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false);
-            Starsearch();
-            GameObject star = findMe[0];
-            target = star.transform;
-            pointingarrow.transform.position = pointingarrow.transform.forward;
+            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false, "Enter name of star");
 
-            pointingarrow.transform.LookAt(star.transform);
 
             //pointingarrow.transform.LookAt(target);
-         
 
         }
 
-     
+
     }
 }

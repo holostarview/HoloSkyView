@@ -1,0 +1,12 @@
+﻿{
+  "name": "Tests",
+  "references": [
+    "CelestialData"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

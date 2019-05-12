@@ -6,10 +6,10 @@ using System.IO;
 
 
 
-public class StarInfo : GSTimeConverter
+public class StarInfo : LSTConverter
 {
   
-    private string starName; //The star's proper name. Current datbase only has a few names so this will be blank for most
+    private string starName; //The star's proper name. Current database only has a few names so this will be blank for most
 
     private double rightAscension; //Right Ascension in equatorial coordinate system
     private double declination; //declination in equatorial coordinate system
@@ -17,18 +17,18 @@ public class StarInfo : GSTimeConverter
     private double azimuth; //horizontal position
     private double finalAzimuth;
                                 //private static DateTime currentDate = DateTime.Now;
-    private double latitude = 48.4316; //Currently lat for london. TODO: Get from paired app once availiable
+    private double latitude = 48.4316; //Currently lat for london. TODO: Get from paired app once available
 
     double h; // Local hour angle in degrees
     double magnitude; // Magnitude of the star
-    double raditude;
+    double raditude; //Altitude in radians
 
     public StarInfo(){
     }
 
     
     /* This class is used to convert the static equatorial coordinates to 
-     * horzontal coordinates which the app us to display planets as seen by the 
+     * horizontal coordinates which the app us to display planets as seen by the 
      * user in their current location.
      * Results are in degrees.
      * Reference for the math used: http://star-www.st-and.ac.uk/~fv/webnotes/chapter7.htm
